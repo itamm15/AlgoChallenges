@@ -16,16 +16,16 @@ for _ in range(0, int(number_of_words)):
   else:
     words.append(list(new_word))
 
-# # Current representation:
-# # [
-# #   [a, a, c]
-# #   [a, b, c]
-# #   [a, c, c]
-# #   [a, b, c]
-# #   [a, b, c]
-# # ]
-# # So the the word occurs also in the martix, column written direction,
-# # The best idea is going to transpose the 'matrix', and operate on rows.
+# Current representation:
+# [
+#   [a, a, c]
+#   [a, b, c]
+#   [a, c, c]
+#   [a, b, c]
+#   [a, b, c]
+# ]
+# So the the word occurs also in the martix, column written direction,
+# The best idea is going to transpose the 'matrix', and operate on rows.
 
 if not state:
   transposed_matrix = helpers.transpose(words)
@@ -41,7 +41,7 @@ if not state:
 if not state:
   print("NO")
 
-# # 2. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/pp-test-linear-independence
+# 2. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/pp-test-linear-independence
 
 matrix_size = input()
 vectors = []
@@ -200,3 +200,29 @@ for iterator in range(1, len(points) + 1):
         greatest_area = area
 
 print(str(smallest_area) + " " + str(greatest_area))
+
+# 6. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/ppp-test-pionowe-sortowanie
+
+def transpose_matrix_of_vectors(matrix):
+  return list(map(list, zip(*matrix)))
+
+columns, rows = input().split()
+matrix = []
+
+# sort
+
+for row in range(0, int(rows)):
+  numbers = input().split()
+  matrix.append([int(number) for number in numbers])
+
+## TRANSPOSE
+matrix = transpose_matrix_of_vectors(matrix)
+## SORT
+
+for row in matrix:
+  row.sort()
+
+for column in range(0, int(rows)):
+  for row in range(0, int(columns)):
+    print(str(matrix[row][column]) + " ", end='')
+  print()
