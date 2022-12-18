@@ -203,9 +203,6 @@ print(str(smallest_area) + " " + str(greatest_area))
 
 # 6. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/ppp-test-pionowe-sortowanie
 
-def transpose_matrix_of_vectors(matrix):
-  return list(map(list, zip(*matrix)))
-
 columns, rows = input().split()
 matrix = []
 
@@ -216,7 +213,7 @@ for row in range(0, int(rows)):
   matrix.append([int(number) for number in numbers])
 
 ## TRANSPOSE
-matrix = transpose_matrix_of_vectors(matrix)
+matrix = helpers.transpose_matrix_of_vectors(matrix)
 ## SORT
 
 for row in matrix:
@@ -226,3 +223,28 @@ for column in range(0, int(rows)):
   for row in range(0, int(columns)):
     print(str(matrix[row][column]) + " ", end='')
   print()
+
+
+# 7. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/pp-test-jumping-in-matrix
+
+FLAG = True
+matrix_size = input()
+starting_i, starting_j = input().split()
+matrix = []
+
+for iterator in range(0, int(matrix_size)):
+  numbers = input().split()
+  matrix.append([int(number) for number in numbers])
+
+helpers.print_matrix(matrix)
+
+while FLAG:
+  # Smallest in row?
+  if matrix[int(starting_i)][int(starting_j)] == smallest_in_row(matrix[int(starting_i)]):
+    FLAG = False
+    break
+  # Smallest in column?
+
+
+def smallest_in_row(matrix):
+  min(matrix)
