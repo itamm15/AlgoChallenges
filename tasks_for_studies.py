@@ -1,4 +1,5 @@
 import helpers
+import copy
 
 # 1. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/pp-test-find-word-in-matrix
 
@@ -225,26 +226,34 @@ for column in range(0, int(rows)):
   print()
 
 
-# 7. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/pp-test-jumping-in-matrix
+# 7. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/pp-test-macierze
 
-FLAG = True
+def delete_column(matrix, index):
+  return [row[:index] + row[index + 1:] for row in matrix]
+
 matrix_size = input()
-starting_i, starting_j = input().split()
-matrix = []
+main_matrix = []
+submatrix = []
+flag = False
 
-for iterator in range(0, int(matrix_size)):
-  numbers = input().split()
-  matrix.append([int(number) for number in numbers])
+for _ in range(0, int(matrix_size)):
+  values = input().split()
+  main_matrix.append(values)
 
-helpers.print_matrix(matrix)
+for _ in range(0, int(matrix_size) - 1):
+  values = input().split()
+  submatrix.append(values)
 
-while FLAG:
-  # Smallest in row?
-  if matrix[int(starting_i)][int(starting_j)] == smallest_in_row(matrix[int(starting_i)]):
-    FLAG = False
-    break
-  # Smallest in column?
+for row in range(0, int(matrix_size)):
+  for column in range(0, int(matrix_size)):
+    temporary_matrix = copy.deepcopy(main_matrix)
+    del temporary_matrix[row]
+    temporary_matrix = delete_column(temporary_matrix, column)
+    if temporary_matrix == submatrix:
+      flag = True
+      break
 
-
-def smallest_in_row(matrix):
-  min(matrix)
+if flag:
+  print("True")
+else:
+  print("False")
