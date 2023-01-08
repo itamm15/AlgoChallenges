@@ -1,5 +1,6 @@
 import helpers
 import copy
+import math
 
 # 1. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/pp-test-find-word-in-matrix
 
@@ -257,3 +258,66 @@ if flag:
   print("True")
 else:
   print("False")
+
+
+# 8. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/pp-test-can-you-get-a-palindrome
+
+is_palindrome = False
+word = input().lower()
+palindrome = word[::-1]
+
+for determinant in range(0, len(word)):
+  for iterator in range(0, len(word)):
+    first_part = word[:determinant]
+    between = word[determinant + 1:iterator - 1]
+    second_part = word[iterator:]
+    pali = first_part + between + second_part
+    if pali == pali[::-1]:
+      is_palindrome = True
+      break
+
+if is_palindrome or word == palindrome:
+  print("YES")
+else:
+  print("NO")
+
+# 9. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/pp-test-palindr0000m-eng
+
+number = input()
+total_sum = 0
+
+for starting_position in range(0, len(number)):
+  for ending_position in range(starting_position, len(number)):
+    substring = number[starting_position:ending_position + 1]
+    if substring[0] != '0':
+      parsed_substring = substring.strip("0")
+      if parsed_substring == parsed_substring[::-1]:
+        total_sum += 1
+
+print(total_sum)
+
+# 10. https://www.hackerrank.com/contests/zadania-z-poprzednich-kolokwiow-2223/challenges/pp-test-primes-in-number
+
+def is_prime(number):
+  if number < 2:
+    return False
+  else:
+    ## It can be replaced with number/2 or number - 1
+    for possible_divisor in range(2, int(math.sqrt(number)) + 1):
+      if number % possible_divisor == 0:
+        return False
+    return True
+
+number = input()
+primes = []
+
+for starting_position in range(0, len(number)):
+  for ending_position in range(starting_position, len(number)):
+    subnumber = int(number[starting_position:ending_position + 1])
+    if is_prime(subnumber) and subnumber not in primes:
+      primes.append(int(subnumber))
+
+primes.sort(key = str, reverse = True)
+
+for prime in primes:
+  print(prime)
