@@ -1,2 +1,8 @@
 .vscode
 .DS_Store
+
+# .exe
+*.exe
+
+# .out
+*.out
