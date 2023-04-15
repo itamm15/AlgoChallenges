@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 int main() {
   sf::Window window(sf::VideoMode(800, 600), "My Window");
@@ -6,8 +7,16 @@ int main() {
   while(window.isOpen()) {
     sf::Event event;
     while(window.pollEvent(event)) {
-      if(event.type == sf::Event::Closed)
-        window.close();
+      switch(event.type) {
+        case sf::Event::Closed:
+          window.close();
+          break;
+        case sf::Event::KeyPressed:
+          std::cout << "The key has been pressed!";
+          break;
+        default:
+          break;
+        }
     }
   }
 }
